@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/05/28 18:22:50 by femaury          ###   ########.fr        #
+#    Updated: 2018/05/28 20:11:41 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT)
 	@ar rc $@ $(OBJ) $(LIB_OBJ)
 	@ranlib $@
-	@echo "\n[\033[32mOK\033[0m] $(NAME) successfully created.\n"
+	@echo "\n[\033[32mOK\033[0m] $(NAME) is ready!\n"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

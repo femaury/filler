@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/05/28 18:22:37 by femaury          ###   ########.fr        #
+#    Updated: 2018/05/28 20:08:08 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		   ft_putlst.c ft_strtablen.c ft_strtablen_at.c ft_sqrt.c \
 		   ft_strndup.c ft_strnjoin.c ft_strnclr.c ft_uimaxtoa_base.c \
 		   ft_isupper.c ft_islower.c ft_setupcase.c ft_setlowcase.c \
-		   ft_imaxtoa_base.c ft_wcharlen.c ft_wstrlen.c ft_strhasc.c
+		   ft_imaxtoa_base.c ft_wcharlen.c ft_wstrlen.c ft_strhasc.c ft_gnl.c \
+		   ft_strisonly.c
 OBJ_PATH = .
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
@@ -43,7 +44,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 	@ranlib $@
-	@echo "\n[\033[32mOK\033[0m] $(NAME) created successfully.\n"
+	@echo "\n[\033[32mOK\033[0m] $(NAME) is ready!\n"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@$(CC) $(CFLAGS) -Iincludes -o $@ -c $^

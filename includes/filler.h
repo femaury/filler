@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 17:22:01 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/28 17:39:02 by femaury          ###   ########.fr       */
+/*   Updated: 2018/05/28 20:06:55 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,16 @@ typedef struct	s_env
 	unsigned int	last_u;
 	t_piece			p;
 }				t_env;
+
+size_t			ft_strlen(const char *str);
+void			*ft_memalloc(size_t size);
+void			*ft_memset(void *b, int c, size_t len);
+void			ft_strdel(char **as);
+char			*ft_strdup(const char *s1);
+int				ft_strncmp(const char *s1, const  char *s2, size_t n);
+int				ft_atoi(const char *str);
+int				ft_gnl(const int fd, char **line);
+int				ft_strisonly(const char *str, const char *ref);
+int				ft_isdigit(int c);
 
 #endif

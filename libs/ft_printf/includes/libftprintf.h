@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 12:01:47 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/23 11:39:04 by femaury          ###   ########.fr       */
+/*   Updated: 2018/05/29 13:08:31 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 42
 # define FLAGS fstr.flags
 # define LFLAGS fstr.lflags
 # define WIDTH fstr.width

@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:48:12 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/28 20:09:29 by femaury          ###   ########.fr       */
+/*   Updated: 2018/05/29 21:32:23 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ static int	create_map(t_env *env, char *line)
 		return (1);
 	if (!(env->map[env->map_h] = (char *)ft_memalloc(env->map_w)))
 		return (1);
-	while (ft_gnl(0, &line) > 0 && !(i = 0) && i > env->map_h)
+	if (ft_gnl(0, &line) <= 0)
+		return (1);
+	ft_strdel(&line);
+	i = 0;
+	while (i < env->map_h && ft_gnl(0, &line) > 0)
 	{
-		if (!ft_strisonly(line, ".OX") || ft_strlen(line) > env->map_w + 4)
+		if (!ft_strisonly(line + 4, ".OX") || ft_strlen(line) > env->map_w + 4)
 			return (1);
 		env->map[i] = ft_strdup(line + 4);
 		ft_strdel(&line);
@@ -54,17 +58,15 @@ static int	set_map(t_env *env)
 	line = NULL;
 	if ((ft_gnl(0, &line)) <= 0)
 		return (1);
-	if (ft_strncmp(line, "Plateau ", 8) && ft_isdigit(*(line + 8)))
-		env->map_h = ft_atoi(line + 8);
-	else
+	if (!(!ft_strncmp(line, "Plateau ", 8) && ft_isdigit(*(line + 8))))
 		return (1);
+	env->map_h = ft_atoi(line + 8);
 	tmp = env->map_h;
 	while (tmp > 0 && ++i)
 		tmp /= 10;
-	if (ft_isdigit(*(line + i + 9)))
-		env->map_w = ft_atoi(line + i + 9);
-	else
+	if (!ft_isdigit(*(line + i + 8)))
 		return (1);
+	env->map_w = ft_atoi(line + i + 8);
 	ft_strdel(&line);
 	if (create_map(env, line))
 		return (1);
@@ -73,9 +75,16 @@ static int	set_map(t_env *env)
 
 int			main(void)
 {
-	t_env	env;
+	unsigned int		i;
+	t_env				env;
 
-	if (set_player(&env) && set_map(&env))
+	i = 0;
+	if (set_player(&env) || set_map(&env) || set_piece(&env))
 		return (1);
+	while (i < env.map_h)
+		ft_printf("%s\n", env.map[i++]);
+	i = 0;
+	while (i < env.p.h - env.p.extra_h)
+		ft_printf("%s\n", env.p.tab[i++]);
 	return (0);
 }

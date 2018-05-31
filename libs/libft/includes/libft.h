@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/28 19:55:29 by femaury          ###   ########.fr       */
+/*   Updated: 2018/05/31 12:45:44 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char			*ft_imaxtoa_base(intmax_t n, int base);
 char			*ft_uimaxtoa_base(uintmax_t n, int base);
 int				ft_atoi(const char *str);
 int				ft_sqrt(int nb);
+int				ft_pow(int n, int power);
 int				ft_strisonly(const char *str, const char *ref);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -75,6 +76,7 @@ int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void			ft_strdel(char **as);
+void			ft_tabdel(void **ap, size_t len);
 void			ft_strclr(char *s);
 void			ft_strnclr(char *s, size_t len);
 void			ft_striter(char *s, void (*f)(char *));

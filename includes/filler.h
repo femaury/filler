@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 17:22:01 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/30 18:01:55 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/01 17:55:29 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 # include <limits.h>
 
 # include "../libs/libft/includes/libft.h"
-# include "../libs/libft/includes/ft_gnl.h"
+# include "../libs/libft/includes/get_next_line.h"
 # include "../libs/ft_printf/includes/libftprintf.h"
+
+int				fd;
+int				gnlcount;
 
 typedef struct	s_piece
 {
@@ -49,7 +52,8 @@ typedef struct	s_env
 	t_piece			p;
 }				t_env;
 
-int				set_piece(t_env *env);
+void			init_struct(t_env *env);
 void			put_piece(t_env *env);
+int				set_piece(t_env *env);
 
 #endif

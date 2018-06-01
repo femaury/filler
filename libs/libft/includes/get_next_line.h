@@ -3,24 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cholm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 14:55:03 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 17:52:36 by femaury          ###   ########.fr       */
+/*   Created: 2017/12/16 18:13:33 by cholm             #+#    #+#             */
+/*   Updated: 2018/06/01 17:52:30 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include "libft.h"
+# include <limits.h>
 
 # define BUFF_SIZE 42
-# define STOP_CHAR '\n'
 
-int		ft_gnl(const int fd, char **line);
+
+typedef struct	s_vars
+{
+	int		i;
+	int		end;
+	int		read_val;
+	char	readbuf[BUFF_SIZE + 1];
+}				t_vars;
+
+int		get_next_line(const int fd, char **line);
 
 #endif

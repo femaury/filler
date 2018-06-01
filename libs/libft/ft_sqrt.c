@@ -6,21 +6,23 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 17:05:10 by femaury           #+#    #+#             */
-/*   Updated: 2018/04/26 17:09:19 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/01 19:28:19 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_sqrt(int nb)
+float	ft_sqrt(float nbr)
 {
-	int		i;
+	float tmp;
+	float res;
 
-	i = 10;
-	while (i * i < nb)
-		i += 10;
-	i -= 10;
-	while (i * i < nb)
-		i++;
-	return (i * i == nb) ? i : --i;
+	res = nbr / 2;
+	tmp = 0;
+	while (res != tmp)
+	{
+		tmp = res;
+		res = ((nbr / tmp + tmp) / 2);
+	}
+	return (res);
 }

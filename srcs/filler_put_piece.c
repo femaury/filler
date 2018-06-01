@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:46:52 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/31 13:47:15 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/01 22:03:39 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 {
 	if (env->p.check)
 	{
-		if (ft_sqrt(ft_pow(x - env->start_x, 2) + ft_pow(y - env->start_y, 2))
-				< ft_sqrt(ft_pow(env->p.posx - env->start_x, 2)
-				+ ft_pow(env->p.posy - env->start_y, 2)))
+		if (ft_sqrt((float)(ft_pow(x - env->start_x, 2) +
+				ft_pow(y - env->start_y, 2)))
+				< ft_sqrt((float)(ft_pow(env->p.posx - env->start_x, 2)
+				+ ft_pow(env->p.posy - env->start_y, 2))))
 		{
 			env->p.posx = x;
 			env->p.posy = y;
+			dprintf(fd, "bingo bingo\n");
 		}
 	}
 	else
@@ -29,6 +31,7 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		env->p.posx = x;
 		env->p.posy = y;
 		env->p.check = 1;
+		dprintf(fd, "bingo\n");
 	}
 }
 
@@ -44,7 +47,7 @@ static void	check_position(t_env *env, unsigned x, unsigned y)
 	{
 		while (!stop && j < env->map_w)
 		{
-			if (env->map[i][j] == env->char_u + 32)
+			if (env->map[i][j] == env->char_u)
 			{
 				env->start_x = j;
 				env->start_y = i;
@@ -57,6 +60,10 @@ static void	check_position(t_env *env, unsigned x, unsigned y)
 	check_distance(env, x, y);
 }
 
+/*
+ * 		Changed k and l to extras
+*/
+
 static int	check_piece(t_env *env, unsigned i, unsigned j)
 {
 	unsigned int	k;
@@ -65,19 +72,16 @@ static int	check_piece(t_env *env, unsigned i, unsigned j)
 
 	k = 0;
 	check = 0;
-	while (!(l = 0) && k < env->p.true_h)
+	while (!(l = 0) && i + k < env->map_h && k < env->p.true_h)
 	{
-		while (l < env->p.true_w)
+		while (j + l < env->map_w && l < env->p.true_w)
 		{
-			if (k == env->p.h || l == env->p.w)
-				return (0);
 			if (env->p.tab[k][l] == '*')
 			{
-				if (env->map[i + k][j + l] == env->char_u ||
-						env->map[i + k][j + l] == env->char_u + 32)
+				if (env->map[i + k][j + l] == env->char_u)
 					return (0);
 				if (env->map[i + k][j + l] == env->char_i)
-					if (check++ > 1)
+					if (++check > 1)
 						return (0);
 			}
 			l++;
@@ -97,7 +101,6 @@ void		put_piece(t_env *env)
 
 	i = 0;
 	env->p.check = 0;
-	ft_printf("biz\n");
 	while (i + env->p.true_h < env->map_h)
 	{
 		j = 0;
@@ -105,8 +108,10 @@ void		put_piece(t_env *env)
 			check_piece(env, i, j++);
 		i++;
 	}
-	ft_printf("yolo?\n");
+	dprintf(fd, "posy: %u extra: %u AND posx: %u extra: %u\n", env->p.posy, env->p.extra_h, env->p.posx, env->p.extra_w);
 	if (env->p.check)
-		ft_printf("%d %d\n", (int)(env->p.posx - env->p.extra_w),
-				(int)(env->p.posy - env->p.extra_h + 1));	
+		ft_printf("%d %d\n", (int)env->p.posy - (int)env->p.extra_h,
+				(int)env->p.posx - (int)env->p.extra_w);
+	else
+		ft_printf("0 0\n");
 }

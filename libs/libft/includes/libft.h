@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/05/31 12:45:44 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/01 19:27:51 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 
+float			ft_sqrt(float nb);
+int				ft_pow(int n, int power);
+
 void			ft_setupcase(char *s);
 void			ft_setlowcase(char *s);
 char			*ft_itoa(int n);
@@ -41,8 +44,6 @@ char			*ft_itoa_base(int n, int base);
 char			*ft_imaxtoa_base(intmax_t n, int base);
 char			*ft_uimaxtoa_base(uintmax_t n, int base);
 int				ft_atoi(const char *str);
-int				ft_sqrt(int nb);
-int				ft_pow(int n, int power);
 int				ft_strisonly(const char *str, const char *ref);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);

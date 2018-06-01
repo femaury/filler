@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   filler_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 14:30:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 18:17:37 by femaury          ###   ########.fr       */
+/*   Created: 2018/06/01 13:16:47 by femaury           #+#    #+#             */
+/*   Updated: 2018/06/01 13:20:09 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "filler.h"
 
-size_t	ft_strlen(const char *s)
+void	init_struct(t_env *env)
 {
-	size_t	i;
-
-	i = 0;
-	if (s)
-	{
-		while (*s++)
-			i++;
-	}
-	return (i);
+	env->map_w = 0;
+	env->map_h = 0;
+	env->map = NULL;
+	env->char_i = 0;
+	env->char_u = 0;
+	env->start_x = 0;
+	env->start_y = 0;
+	env->p.w = 0;
+	env->p.h = 0;
+	env->p.extra_w = 0;
+	env->p.extra_h = 0;
+	env->p.true_w = 0;
+	env->p.true_h = 0;
+	env->p.tab = NULL;
+	env->p.check = 0;
+	env->p.posx = 0;
+	env->p.posy = 0;
 }

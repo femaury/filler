@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 19:27:51 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 13:42:52 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void			ft_strdel(char **as);
-void			ft_tabdel(void **ap, size_t len);
+void			ft_tabdel(void **tab, size_t len);
 void			ft_strclr(char *s);
 void			ft_strnclr(char *s, size_t len);
 void			ft_striter(char *s, void (*f)(char *));

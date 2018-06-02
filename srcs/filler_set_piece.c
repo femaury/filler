@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 18:11:16 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 22:05:40 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 13:25:10 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ static void	cut_piece(t_env *env)
 	{
 		dprintf(fd, "tab[%u]: %s\n", i, env->p.tab[i]);
 		env->p.tab[i - env->p.extra_h] = env->p.tab[i];
-		if (i > env->p.h - env->p.extra_h + 1)
-			ft_strdel(&env->p.tab[i]);
+//		if (i >= env->p.h - env->p.extra_h)
+//			ft_strdel(&env->p.tab[i]);
 		i++;
 	}
-	dprintf(fd, "free 2");
+	dprintf(fd, "free 2\n");
 	i = 0;
 	while (i < env->p.h - env->p.extra_h)
 		dprintf(fd, "%s\n", env->p.tab[i++]);

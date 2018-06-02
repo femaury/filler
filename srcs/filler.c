@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:48:12 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 21:11:27 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 13:44:37 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			main(void)
 	t_env				env;
 
 	line = NULL;
-	fd = open("/dev/ttys002", O_WRONLY);
+	fd = open("/dev/ttys000", O_WRONLY);
 	init_struct(&env);
 	while (1)
 	{
@@ -106,6 +106,7 @@ int			main(void)
 			}
 			else 
 			{
+				ft_strdel(&line);
 				ft_tabdel((void **)env.map, env.map_h);
 				ft_tabdel((void **)env.p.tab, env.p.h);
 				if (create_map(&env, line) || set_piece(&env))

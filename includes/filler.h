@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 17:22:01 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 17:55:29 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 14:43:15 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_env
 	char			char_u;
 	unsigned int	start_x;
 	unsigned int	start_y;
+	unsigned int	check_top;
 	t_piece			p;
 }				t_env;
 

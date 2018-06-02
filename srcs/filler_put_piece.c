@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:46:52 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 22:03:39 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 14:59:16 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		{
 			env->p.posx = x;
 			env->p.posy = y;
-			dprintf(fd, "bingo bingo\n");
+			if (env->check_top && (ft_strhasc(env->map[0], env->char_i) || ft_strisonly(env->map[0], &env->char_u)))
+				env->check_top = 0;
 		}
 	}
 	else
 	{
 		env->p.posx = x;
 		env->p.posy = y;
+		if (env->check_top && (ft_strhasc(env->map[0], env->char_i) || ft_strisonly(env->map[0], &env->char_u)))
+				env->check_top = 0;
 		env->p.check = 1;
-		dprintf(fd, "bingo\n");
 	}
 }
 
@@ -43,26 +45,45 @@ static void	check_position(t_env *env, unsigned x, unsigned y)
 
 	i = 0;
 	stop = 0;
-	while (!(j = 0) && !stop && i < env->map_h)
-	{
-		while (!stop && j < env->map_w)
+	if (env->check_top)
+		while (!(j = 0) && !stop && i < env->map_h)
 		{
-			if (env->map[i][j] == env->char_u)
+			while (!stop && j < env->map_w)
 			{
-				env->start_x = j;
-				env->start_y = i;
-				stop = 1;
+				if (env->map[i][j] == env->char_u)
+				{
+					env->start_x = j;
+					env->start_y = i;
+					stop = 1;
+				}
+				j++;
 			}
-			j++;
+			i++;
 		}
-		i++;
+	else
+	{
+		i = env->map_h;
+		while (!(j = env->map_w) && !stop)
+		{
+			while (!stop)
+			{
+				if (env->map[i][j] == env->char_u)
+				{
+					env->start_x = j;
+					env->start_y = i;
+					stop = 1;
+				}
+				if (!j)
+					break ;
+				j--;
+			}
+			if (!i)
+				break ;
+			i--;
+		}
 	}
 	check_distance(env, x, y);
 }
-
-/*
- * 		Changed k and l to extras
-*/
 
 static int	check_piece(t_env *env, unsigned i, unsigned j)
 {
@@ -108,7 +129,6 @@ void		put_piece(t_env *env)
 			check_piece(env, i, j++);
 		i++;
 	}
-	dprintf(fd, "posy: %u extra: %u AND posx: %u extra: %u\n", env->p.posy, env->p.extra_h, env->p.posx, env->p.extra_w);
 	if (env->p.check)
 		ft_printf("%d %d\n", (int)env->p.posy - (int)env->p.extra_h,
 				(int)env->p.posx - (int)env->p.extra_w);

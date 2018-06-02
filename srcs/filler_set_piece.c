@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 18:11:16 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 13:25:10 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:44:11 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	get_true_values(t_env *env)
 				break ;
 			j--;
 		}
-		dprintf(fd, "j: %u width: %u\n", j, env->p.w);
 		if (j || env->p.tab[i][j] == '*')
 			max = j > max ? j : max;
 		else if (env->p.tab[i][0] != '*')
@@ -39,47 +38,27 @@ static void	get_true_values(t_env *env)
 	env->p.true_w = env->p.w - (env->p.w - max) + 1;
 }
 
-/*
- * 		DOUBLE FREE
- *
- *	  Inside cut_piece
- *	  Between 2 and 3
-*/	
-
 static void	cut_piece(t_env *env)
 {
 	char			*tmp;
 	unsigned int	i;
 
 	i = 0;
-	while (i < env->p.h)
-		dprintf(fd, "%s\n", env->p.tab[i++]);
-	i = 0;
 	while (i < env->p.extra_h)
 		ft_strdel(&env->p.tab[i++]);
-	dprintf(fd, "free i: %u extra: %u\n", i, env->p.extra_h);
 	while (i < env->p.h)
 	{
-		dprintf(fd, "tab[%u]: %s\n", i, env->p.tab[i]);
 		env->p.tab[i - env->p.extra_h] = env->p.tab[i];
-//		if (i >= env->p.h - env->p.extra_h)
-//			ft_strdel(&env->p.tab[i]);
 		i++;
 	}
-	dprintf(fd, "free 2\n");
-	i = 0;
-	while (i < env->p.h - env->p.extra_h)
-		dprintf(fd, "%s\n", env->p.tab[i++]);
 	i = 0;
 	while (i < env->p.h - env->p.extra_h)
 	{
-		dprintf(fd, "loop i: %u\n", i);
 		tmp = env->p.tab[i];
 		env->p.tab[i] = ft_strdup(env->p.tab[i] + env->p.extra_w);
 		ft_strdel(&tmp);
 		i++;
 	}
-	dprintf(fd, "free 3\n");
 	env->p.w -= env->p.extra_w;
 	env->p.h -= env->p.extra_h;
 	get_true_values(env);
@@ -89,14 +68,13 @@ static int	create_piece(t_env *env, char *line, unsigned j, unsigned check)
 {
 	unsigned int	i;
 
+	i = 0;
 	env->p.extra_w = UINT_MAX;
 	env->p.extra_h = 0;
-	if (!(i = 0) && !(env->p.tab = (char **)malloc(sizeof(char *) * env->p.h)))
+	if (!(env->p.tab = (char **)malloc(sizeof(char *) * env->p.h)))
 		return (1);
-	dprintf(fd, "--> BEFORE PIECE = %u <--\n", gnlcount);
 	while (!(j = 0) && i < env->p.h && get_next_line(0, &line) > 0)
 	{
-		gnlcount++;
 		while (line[j])
 			if (line[j++] == '*')
 			{
@@ -111,7 +89,6 @@ static int	create_piece(t_env *env, char *line, unsigned j, unsigned check)
 			return (1);
 		env->p.tab[i++] = line;
 	}
-	dprintf(fd, "--> AFTER  PIECE = %u <--\n", gnlcount);
 	cut_piece(env);
 	return (0);
 }
@@ -125,10 +102,10 @@ int			set_piece(t_env *env)
 	unsigned int	check;
 
 	i = 1;
+	j = 0;
 	line = NULL;
 	if (get_next_line(0, &line) <= 0)
 		return (1);
-	gnlcount++;
 	if (!(!ft_strncmp(line, "Piece ", 6) && ft_isdigit(*(line + 6))))
 		return (1);
 	env->p.h = ft_atoi(line + 6);
@@ -139,7 +116,7 @@ int			set_piece(t_env *env)
 		return (1);
 	env->p.w = ft_atoi(line + i + 7);
 	ft_strdel(&line);
-	if (create_piece(env, line, (j = 0), (check = 0)))
+	if (create_piece(env, line, j, (check = 0)))
 		return (1);
 	return (0);
 }

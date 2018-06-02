@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/06/01 13:20:22 by femaury          ###   ########.fr        #
+#    Updated: 2018/06/02 16:45:41 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ CFLAGS = -Wall -Wextra -Werror
 all: libft printf
 
 $(NAME): $(OBJ) libs/libft/libft.a libs/ft_printf/libftprintf.a
-	@$(CC) $(CFLAGS) -Iincludes -o $(NAME) $(OBJ) libs/libft/libft.a libs/ft_printf/libftprintf.a
+	@$(CC) $(CFLAGS) -Iincs -o $(NAME) $(OBJ) libs/libft/libft.a libs/ft_printf/libftprintf.a
 	@echo "\n[\033[32mOK\033[0m] $(NAME) compiled successfully."
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(CFLAGS) -Iincludes -o $@ -c $<
+	@$(CC) $(CFLAGS) -Iincs -o $@ -c $<
 	@echo "[\033[32mOK\033[0m] $@ compiled successfully."
 
 libft:

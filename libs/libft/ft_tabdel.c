@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 16:26:30 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 13:42:28 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:49:04 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_tabdel(void **tab, size_t len)
 			tab[i] = NULL;
 			i++;
 		}
-		free (tab);
+		free(tab);
 		tab = NULL;
 	}
 }

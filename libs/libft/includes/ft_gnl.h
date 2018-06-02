@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_gnl.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:55:03 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/01 17:52:36 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:49:49 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FT_GNL_H
+# define FT_GNL_H
 
 # include <sys/types.h>
 # include <sys/stat.h>

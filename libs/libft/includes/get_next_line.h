@@ -6,7 +6,7 @@
 /*   By: cholm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 18:13:33 by cholm             #+#    #+#             */
-/*   Updated: 2018/06/01 17:52:30 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:50:08 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define BUFF_SIZE 42
 
-
 typedef struct	s_vars
 {
 	int		i;
@@ -32,6 +31,6 @@ typedef struct	s_vars
 	char	readbuf[BUFF_SIZE + 1];
 }				t_vars;
 
-int		get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
 
 #endif

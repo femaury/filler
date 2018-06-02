@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 17:22:01 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 14:43:15 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 15:46:36 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
-# include <stdio.h>
 # include <limits.h>
 
 # include "../libs/libft/includes/libft.h"
 # include "../libs/libft/includes/get_next_line.h"
 # include "../libs/ft_printf/includes/libftprintf.h"
-
-int				fd;
-int				gnlcount;
 
 typedef struct	s_piece
 {

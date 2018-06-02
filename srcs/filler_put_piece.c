@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:46:52 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 14:59:16 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:44:39 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		{
 			env->p.posx = x;
 			env->p.posy = y;
-			if (env->check_top && (ft_strhasc(env->map[0], env->char_i) || ft_strisonly(env->map[0], &env->char_u)))
+			if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
+						|| ft_strisonly(env->map[0], &env->char_u)))
 				env->check_top = 0;
 		}
 	}
@@ -31,9 +32,38 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 	{
 		env->p.posx = x;
 		env->p.posy = y;
-		if (env->check_top && (ft_strhasc(env->map[0], env->char_i) || ft_strisonly(env->map[0], &env->char_u)))
-				env->check_top = 0;
 		env->p.check = 1;
+		if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
+					|| ft_strisonly(env->map[0], &env->char_u)))
+			env->check_top = 0;
+	}
+}
+
+static void	check_position2(t_env *env)
+{
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	stop;
+
+	i = env->map_h;
+	stop = 0;
+	while (!(j = env->map_w) && !stop)
+	{
+		while (!stop)
+		{
+			if (env->map[i][j] == env->char_u)
+			{
+				env->start_x = j;
+				env->start_y = i;
+				stop = 1;
+			}
+			if (!j)
+				break ;
+			j--;
+		}
+		if (!i)
+			break ;
+		i--;
 	}
 }
 
@@ -61,27 +91,7 @@ static void	check_position(t_env *env, unsigned x, unsigned y)
 			i++;
 		}
 	else
-	{
-		i = env->map_h;
-		while (!(j = env->map_w) && !stop)
-		{
-			while (!stop)
-			{
-				if (env->map[i][j] == env->char_u)
-				{
-					env->start_x = j;
-					env->start_y = i;
-					stop = 1;
-				}
-				if (!j)
-					break ;
-				j--;
-			}
-			if (!i)
-				break ;
-			i--;
-		}
-	}
+		check_position2(env);
 	check_distance(env, x, y);
 }
 
@@ -109,10 +119,9 @@ static int	check_piece(t_env *env, unsigned i, unsigned j)
 		}
 		k++;
 	}
-	if (!check)
-		return (0);
-	check_position(env, j, i);
-	return (1);
+	if (check)
+		check_position(env, j, i);
+	return (check ? (1) : (0));
 }
 
 void		put_piece(t_env *env)

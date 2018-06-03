@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:46:52 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/03 14:46:39 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/03 17:55:34 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		{
 			env->p.posx = x;
 			env->p.posy = y;
-			if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
-						|| ft_strisonlyc(env->map[0], env->char_u)))
-				env->check_top = 0;
+//			if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
+//						|| ft_strisonlyc(env->map[0], env->char_u)))
+//				env->check_top = 0;
 		}
 	}
 	else
@@ -33,9 +33,6 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		env->p.posx = x;
 		env->p.posy = y;
 		env->p.check = 1;
-		if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
-					|| ft_strisonlyc(env->map[0], env->char_u)))
-			env->check_top = 0;
 	}
 }
 
@@ -103,9 +100,9 @@ static int	check_piece(t_env *env, unsigned i, unsigned j)
 
 	k = 0;
 	check = 0;
-	while (!(l = 0) && i + k < env->map_h && k < env->p.true_h)
+	while (!(l = 0) && i + k <= env->map_h && k < env->p.true_h)
 	{
-		while (j + l < env->map_w && l < env->p.true_w)
+		while (j + l <= env->map_w && l < env->p.true_w)
 		{
 			if (env->p.tab[k][l] == '*')
 			{
@@ -131,16 +128,21 @@ void		put_piece(t_env *env)
 
 	i = 0;
 	env->p.check = 0;
-	while (i + env->p.true_h < env->map_h)
+	while (i + env->p.true_h <= env->map_h)
 	{
 		j = 0;
-		while (j + env->p.true_w < env->map_w)
+		while (j + env->p.true_w <= env->map_w)
 			check_piece(env, i, j++);
 		i++;
 	}
 	if (env->p.check)
+	{
+		if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
+				|| ft_strisonlyc(env->map[0], env->char_u)))
+			env->check_top = 0;
 		ft_printf("%d %d\n", (int)env->p.posy - (int)env->p.extra_h,
 				(int)env->p.posx - (int)env->p.extra_w);
+	}
 	else
 		ft_printf("0 0\n");
 }

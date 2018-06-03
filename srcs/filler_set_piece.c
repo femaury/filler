@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 18:11:16 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 16:44:11 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/03 14:45:34 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	create_piece(t_env *env, char *line, unsigned j, unsigned check)
 	env->p.extra_w = UINT_MAX;
 	env->p.extra_h = 0;
 	if (!(env->p.tab = (char **)malloc(sizeof(char *) * env->p.h)))
-		return (1);
+		filler_exit(0, NULL);
 	while (!(j = 0) && i < env->p.h && get_next_line(0, &line) > 0)
 	{
 		while (line[j])
@@ -86,7 +86,7 @@ static int	create_piece(t_env *env, char *line, unsigned j, unsigned check)
 		if (!line[j] && !check)
 			env->p.extra_h++;
 		if (ft_strlen(line) > env->p.w)
-			return (1);
+			filler_exit(1, line);
 		env->p.tab[i++] = line;
 	}
 	cut_piece(env);
@@ -105,18 +105,17 @@ int			set_piece(t_env *env)
 	j = 0;
 	line = NULL;
 	if (get_next_line(0, &line) <= 0)
-		return (1);
+		filler_exit(1, line);
 	if (!(!ft_strncmp(line, "Piece ", 6) && ft_isdigit(*(line + 6))))
-		return (1);
+		filler_exit(1, line);
 	env->p.h = ft_atoi(line + 6);
 	tmp = env->p.h;
 	while (tmp > 9 && ++i)
 		tmp /= 10;
 	if (!ft_isdigit(*(line + i + 7)))
-		return (1);
+		filler_exit(1, line);
 	env->p.w = ft_atoi(line + i + 7);
 	ft_strdel(&line);
-	if (create_piece(env, line, j, (check = 0)))
-		return (1);
+	create_piece(env, line, j, (check = 0));
 	return (0);
 }

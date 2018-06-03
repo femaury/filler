@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:46:52 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 16:44:39 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/03 14:46:39 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 			env->p.posx = x;
 			env->p.posy = y;
 			if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
-						|| ft_strisonly(env->map[0], &env->char_u)))
+						|| ft_strisonlyc(env->map[0], env->char_u)))
 				env->check_top = 0;
 		}
 	}
@@ -34,7 +34,7 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		env->p.posy = y;
 		env->p.check = 1;
 		if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
-					|| ft_strisonly(env->map[0], &env->char_u)))
+					|| ft_strisonlyc(env->map[0], env->char_u)))
 			env->check_top = 0;
 	}
 }

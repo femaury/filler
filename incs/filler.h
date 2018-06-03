@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 17:22:01 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/02 15:46:36 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/03 14:42:18 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_env
 
 void			init_struct(t_env *env);
 void			put_piece(t_env *env);
+void			filler_exit(int error, char *line);
 int				set_piece(t_env *env);
 
 #endif

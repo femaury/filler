@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/06/03 14:42:34 by femaury          ###   ########.fr        #
+#    Updated: 2018/06/03 15:05:06 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		   ft_isupper.c ft_islower.c ft_setupcase.c ft_setlowcase.c \
 		   ft_imaxtoa_base.c ft_wcharlen.c ft_wstrlen.c ft_strhasc.c ft_gnl.c \
 		   ft_strisonly.c ft_pow.c ft_tabdel.c get_next_line.c ft_strisonlyc.c
-OBJ_PATH = .
+OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -47,13 +47,17 @@ $(NAME): $(OBJ)
 	@echo "\n[\033[32mOK\033[0m] $(NAME) is ready!\n"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -Iincludes -o $@ -c $^
 	@echo "\033[36mlibs/libft\033[0m: [\033[32mOK\033[0m] $@ successfully compiled."
 
 clean:
 	@$(RM) $(OBJ)
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@echo "\n[\033[32mOK\033[0m] $(NAME) objects cleaned.\n"
 
 fclean: clean
 	@$(RM) $(NAME)
+	@echo "\n[\033[32mOK\033[0m] $(NAME) \033[31mhas been removed.\033[0m\n"
 
 re: fclean all

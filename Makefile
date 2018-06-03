@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/06/03 14:48:20 by femaury          ###   ########.fr        #
+#    Updated: 2018/06/03 15:29:04 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,22 @@ printf:
 	@$(MAKE) $(NAME)
 
 clean:
+ifeq ($(MAKECMDGOALS), "clean")
 	@$(RM) $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@$(MAKE) -C libs/libft/ clean
 	@$(MAKE) -C libs/ft_printf/ clean
+	@echo "\n[\033[32mOK\033[0m] $(NAME) objects cleaned.\n"
+else
+	@$(RM) $(OBJ)
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@echo "\n[\033[32mOK\033[0m] $(NAME) objects cleaned.\n"
+endif
 
 fclean: clean
 	@$(RM) $(NAME)
 	@$(MAKE) -C libs/libft/ fclean
-	@$(MAKE) -C libs/ft_printf/ clean
+	@$(MAKE) -C libs/ft_printf/ fclean
+	@echo "\n[\033[32mOK\033[0m] $(NAME) \033[31mhas been removed.\033[0m\n"
 
 re: fclean all

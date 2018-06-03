@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/05/30 17:48:36 by femaury          ###   ########.fr        #
+#    Updated: 2018/06/03 15:32:54 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIB_SRC_NAME = ft_strlen.c ft_strdel.c ft_putstr.c ft_strnclr.c ft_setlowcase.c 
 			   ft_strnequ.c
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
-LIB_OBJ_PATH = ../libft
+LIB_OBJ_PATH = ../libft/objs
 LIB_OBJ_NAME = $(LIB_SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 LIB_SRC = $(addprefix $(LIB_SRC_PATH)/,$(LIB_SRC_NAME))
@@ -52,10 +52,10 @@ $(LIBFT): $(LIB_OBJ)
 clean:
 	@$(RM) $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	@$(MAKE) -C ../libft/ clean
+	@echo "\n[\033[32mOK\033[0m] $(NAME) objects cleaned.\n"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@$(MAKE) -C ../libft/ fclean
+	@echo "\n[\033[32mOK\033[0m] $(NAME) \033[31mhas been removed.\033[0m\n"
 
 re: fclean all

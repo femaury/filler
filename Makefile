@@ -6,14 +6,14 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/06/03 15:29:04 by femaury          ###   ########.fr        #
+#    Updated: 2018/06/04 19:45:50 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = femaury.filler
 SRC_PATH = srcs
 SRC_NAME = filler.c filler_init.c filler_set_piece.c filler_put_piece.c \
-		   filler_exit.c
+		   filler_exit.c filler_check_last.c
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:46:52 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/04 19:23:59 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/04 21:23:31 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 		{
 			env->p.posx = x;
 			env->p.posy = y;
-			if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
-						|| ft_strisonlyc(env->map[0], env->char_u)))
+			if (ft_strhasc(env->map[0], env->char_i)
+						|| ft_strisonlyc(env->map[0], env->char_u))
 				env->check_top = 0;
+			if (env->start_top
+					&& (ft_strhasc(env->map[env->map_h - 1], env->char_i)))
+				env->check_top = 0;
+
 		}
 	}
 	else
@@ -36,59 +40,22 @@ static void	check_distance(t_env *env, unsigned x, unsigned y)
 	}
 }
 
-static void	check_position2(t_env *env)
-{
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	stop;
-
-	i = env->map_h;
-	stop = 0;
-	while (!(j = env->map_w) && !stop)
-	{
-		while (!stop)
-		{
-			if (env->map[i][j] == env->char_u)
-			{
-				env->start_x = j;
-				env->start_y = i;
-				stop = 1;
-			}
-			if (!j)
-				break ;
-			j--;
-		}
-		if (!i)
-			break ;
-		i--;
-	}
-}
-
 static void	check_position(t_env *env, unsigned x, unsigned y)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	stop;
-
-	i = 0;
-	stop = 0;
-	if (env->check_top)
-		while (!(j = 0) && !stop && i < env->map_h)
-		{
-			while (!stop && j < env->map_w)
-			{
-				if (env->map[i][j] == env->char_u)
-				{
-					env->start_x = j;
-					env->start_y = i;
-					stop = 1;
-				}
-				j++;
-			}
-			i++;
-		}
+	if (!env->start_top)
+	{
+		if (env->check_top)
+			check_pos_topleft(env);
+		else
+			check_pos_botright(env);
+	}
 	else
-		check_position2(env);
+	{
+		if (!env->check_top)
+			check_pos_topright(env);
+		else
+			check_pos_botleft(env);
+	}
 	check_distance(env, x, y);
 }
 
@@ -136,13 +103,8 @@ void		put_piece(t_env *env)
 		i++;
 	}
 	if (env->p.check)
-	{
-		if (env->check_top && (ft_strhasc(env->map[0], env->char_i)
-				|| ft_strisonlyc(env->map[0], env->char_u)))
-			env->check_top = 0;
 		ft_printf("%d %d\n", (int)env->p.posy - (int)env->p.extra_h,
 				(int)env->p.posx - (int)env->p.extra_w);
-	}
 	else
 		ft_printf("0 0\n");
 }

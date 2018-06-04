@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:48:12 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/03 14:44:30 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/04 20:00:28 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static int	set_map(t_env *env)
 	env->map_w = ft_atoi(line + i + 8);
 	ft_strdel(&line);
 	create_map(env, line);
+	if (env->start_y < env->map_h / 2)
+		env->start_top = 1;
 	return (0);
 }
 

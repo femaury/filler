@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 17:22:01 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/03 14:42:18 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/04 20:49:59 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ typedef struct	s_env
 	char			char_u;
 	unsigned int	start_x;
 	unsigned int	start_y;
+	unsigned int	start_top;
 	unsigned int	check_top;
 	t_piece			p;
 }				t_env;
 
 void			init_struct(t_env *env);
 void			put_piece(t_env *env);
+void			check_pos_topleft(t_env *env);
+void			check_pos_topright(t_env *env);
+void			check_pos_botright(t_env *env);
+void			check_pos_botleft(t_env *env);
 void			filler_exit(int error, char *line);
 int				set_piece(t_env *env);
 

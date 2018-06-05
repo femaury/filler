@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 13:16:47 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/04 20:49:48 by femaury          ###   ########.fr       */
+/*   Updated: 2018/06/05 18:42:23 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	init_struct(t_env *env)
 	env->p.check = 0;
 	env->p.posx = 0;
 	env->p.posy = 0;
+	env->p.dist = 0;
 }

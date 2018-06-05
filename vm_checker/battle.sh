@@ -2,9 +2,23 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
+let "playernu = 0"
 for f in ./../vm_filler/players/*.filler
 do
 	let "mapnu = 0"
+	if [ $playernu == 0 ]
+	then player='abanlin'
+	elif [ $playernu == 1 ]
+	then player='carli'
+	elif [ $playernu == 2 ]
+	then player='champely'
+	elif [ $playernu == 3 ]
+	then player='grati'
+	elif [ $playernu == 4 ]
+	then player='hcao'
+	else
+		player='superjeannot'
+	fi
 	for m in ./../vm_filler/maps/map*
 	do
 		let "count = 0"
@@ -17,14 +31,6 @@ do
 			then let "count = $count + 1"
 			fi
 		done
-		let "win = 0"
-		let "win = ($count * 200) / 10"
-		if [ $win -ge 60 ];
-		then echo ${GREEN}$win % of win against $f on map $mapnu as player 1.${NC}
-		else
-			echo ${RED}$win % of win against $f on map $mapnu as player 1.${NC}
-		fi
-		let "count = 0"
 		for n in `seq 1 5`
 		do
 			./../vm_filler/filler_vm -q -p2 ./../*.filler -p1 "$f" -f "$m" > quiet
@@ -34,13 +40,16 @@ do
 			then let "count = $count + 1"
 			fi
 		done
-		let "win = 0"
-		let "win = ($count * 200) / 10"
+		let "win = ($count * 100) / 10"
 		if [ $win -ge 60 ];
-		then echo ${GREEN}$win % of win against $f on map $mapnu as player 2. ${NC}
+		then echo ${GREEN}$win% win against $player on map $mapnu ${NC}
 		else
-			echo ${RED}$win % of win against $f on map $mapnu as player 2. ${NC}
+			echo ${RED}$win% win against $player on map $mapnu ${NC}
 		fi
 		let "mapnu = $mapnu + 1"
+		if [ $mapnu == 3 ];
+		then break
+		fi
 	done
+	let "playernu = $playernu + 1"
 done

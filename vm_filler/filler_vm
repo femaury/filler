@@ -510,6 +510,9 @@ if __FILE__ == $0
 
 		while all_lose(players, trace)
 			for player in players
+#				if (player.score > 15)
+#					exit
+#				end
 				if (player.live > 0)
 					map.gene_piece()
                                   begin
